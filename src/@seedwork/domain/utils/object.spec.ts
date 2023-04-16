@@ -8,7 +8,7 @@ describe('object Unit Tests', () => {
     let boolean = deepFreeze(true);
     expect(typeof boolean).toBe('boolean');
     boolean = deepFreeze(false);
-    expect(typeof str).toBe('boolean');
+    expect(typeof boolean).toBe('boolean');
 
     const number = deepFreeze(2);
     expect(typeof number).toBe('number');

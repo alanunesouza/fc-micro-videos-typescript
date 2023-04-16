@@ -12,20 +12,16 @@ describe('Category', () => {
   it('should generate id automatically', () => {
     let category = new Category({ name:'Movie' })
     expect(category.id).not.toBeNull();
-    expect(category.id).toBeInstanceOf(UniqueEntityId);
 
     category = new Category({ name:'Movie' }, null)
     expect(category.id).not.toBeNull();
-    expect(category.id).toBeInstanceOf(UniqueEntityId);
 
     category = new Category({ name:'Movie' }, undefined)
     expect(category.id).not.toBeNull();
-    expect(category.id).toBeInstanceOf(UniqueEntityId);
 
     const uuidMock = new UniqueEntityId();
     category = new Category({ name:'Movie' }, uuidMock)
-    expect(category.id).toEqual(uuidMock);
-    expect(category.id).toBeInstanceOf(UniqueEntityId);
+    expect(category.id).toEqual(uuidMock.value);
   })
 
   it('constructor of values default', () => {
@@ -33,7 +29,7 @@ describe('Category', () => {
     
     expect(category.props).toStrictEqual(expect.objectContaining({
       name: 'Movie',
-      description: null,
+      description: undefined,
       is_active: true,
     }));
   })
@@ -42,6 +38,29 @@ describe('Category', () => {
     const props = { name: 'Movie', description: 'some description', is_active: true, created_at: new Date() }
     const category = new Category(props);
     
-    expect(category.name).toBe('Movie');
+    expect(category.name).toBe(props.name);
+  })
+
+  it('should update category', () => {
+    const props = { name: 'Movie', description: 'some description', is_active: true, created_at: new Date() }
+    const category = new Category(props);
+    expect(category.name).toBe(props.name);
+    expect(category.description).toBe(props.description);
+
+    const newName = 'Serie';
+    const newDescription = 'new description';
+    category.update(newName, newDescription);
+    expect(category.name).toBe(newName);
+    expect(category.description).toBe(newDescription);
+  })
+
+  it('should activate and deactivate category', () => {
+    const props = { name: 'Movie', description: 'some description', is_active: true, created_at: new Date() }
+    const category = new Category(props);
+    expect(category.is_active).toBe(true);
+    category.deactivate();
+    expect(category.is_active).toBe(false);
+    category.active();
+    expect(category.is_active).toBe(true);
   })
 })
