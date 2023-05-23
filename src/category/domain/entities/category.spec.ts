@@ -34,7 +34,7 @@ describe('Category', () => {
     
     expect(category.props).toStrictEqual(expect.objectContaining({
       name: 'Movie',
-      description: undefined,
+      description: null,
       is_active: true,
     }));
   })
