@@ -47,7 +47,6 @@ describe('Search Unit Tests', () => {
       ]
 
       arrange.forEach(i => {
-        console.log(i)
         expect(new SearchParams({ per_page: i.per_page as any }).per_page).toBe(i.expected)
       });
     })
