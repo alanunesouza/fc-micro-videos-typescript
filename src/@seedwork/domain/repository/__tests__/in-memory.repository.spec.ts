@@ -30,10 +30,10 @@ describe('InMemoryRepository Unit Tests', () => {
   })
 
   it('should throws error when entity not found', () => {
-    expect(repository.findById('fake id')).rejects.toThrow(new NotFoundError('Entity not found'));
+    expect(repository.findById('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
 
     const uuid = v4();
-    expect(repository.findById(uuid)).rejects.toThrow(new NotFoundError('Entity not found'));
+    expect(repository.findById(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
   })
 
   it('should finds a entity by id', async () => {
@@ -73,7 +73,7 @@ describe('InMemoryRepository Unit Tests', () => {
       name: 'test',
       price: 100
     })
-    expect(repository.update(entity)).rejects.toThrow(new NotFoundError('Entity not found'));
+    expect(repository.update(entity)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${entity.id}`));
   })
 
   it('should updates an entity', async () => {
@@ -93,10 +93,10 @@ describe('InMemoryRepository Unit Tests', () => {
   })
 
   it('should throws error when entity not found', () => {
-    expect(repository.delete('fake id')).rejects.toThrow(new NotFoundError('Entity not found'));
+    expect(repository.delete('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
 
     const uuid = v4();
-    expect(repository.delete(uuid)).rejects.toThrow(new NotFoundError('Entity not found'));
+    expect(repository.delete(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
   })
 
   it('should deletes an entity', async () => {
