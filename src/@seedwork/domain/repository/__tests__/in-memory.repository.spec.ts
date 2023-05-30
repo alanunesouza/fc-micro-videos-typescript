@@ -29,11 +29,11 @@ describe('InMemoryRepository Unit Tests', () => {
     expect(entity.toJson()).toStrictEqual(repository.items[0].toJson());
   })
 
-  it('should throws error when entity not found', () => {
-    expect(repository.findById('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
+  it('should throws error when entity not found', async () => {
+    await expect(repository.findById('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
 
     const uuid = v4();
-    expect(repository.findById(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
+    await expect(repository.findById(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
   })
 
   it('should finds a entity by id', async () => {
@@ -68,12 +68,12 @@ describe('InMemoryRepository Unit Tests', () => {
     expect(entities).toStrictEqual([entity, entity2]);
   })
 
-  it('should throws error on update when entity not found', () => {
+  it('should throws error on update when entity not found', async () => {
     const entity = new StubEntity({
       name: 'test',
       price: 100
     })
-    expect(repository.update(entity)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${entity.id}`));
+    await expect(repository.update(entity)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${entity.id}`));
   })
 
   it('should updates an entity', async () => {
@@ -92,11 +92,11 @@ describe('InMemoryRepository Unit Tests', () => {
     expect(entityUpdated.toJson()).toStrictEqual(repository.items[0].toJson());
   })
 
-  it('should throws error when entity not found', () => {
-    expect(repository.delete('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
+  it('should throws error when entity not found', async () => {
+    await expect(repository.delete('fake id')).rejects.toThrow(new NotFoundError(`Entity Not Found using ID fake id`));
 
     const uuid = v4();
-    expect(repository.delete(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
+    await expect(repository.delete(uuid)).rejects.toThrow(new NotFoundError(`Entity Not Found using ID ${uuid}`));
   })
 
   it('should deletes an entity', async () => {
