@@ -13,7 +13,7 @@ describe('GetCategoryUseCase Unit Tests', () => {
   })
 
   it('should throws error when entity not found', async () => {
-    expect(() => useCase.execute({ id: 'fake id' })).rejects.toThrow(new NotFoundError('Entity not found using ID fake id'));
+    await expect(() => useCase.execute({ id: 'fake id' })).rejects.toThrow(new NotFoundError('Entity Not Found using ID fake id'));
   })
 
   it('should returns a category', async () => {

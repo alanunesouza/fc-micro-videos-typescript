@@ -1,8 +1,8 @@
 import UseCase from "../../../@seedwork/application/use-case";
 import CategoryRepository from "../../domain/repository/category.repository";
-import { SearchInputDto } from "../../../@seedwork/application/dto/search-input.dto";
-import { PaginationOutputDto } from "@seedwork/application/dto/pagination-output.dto";
-import { CategoryOutput } from "../dto/category-output.dto";
+import { SearchInputDto } from "../../../@seedwork/application/dto/search-input";
+import { PaginationOutputDto, PaginationOutputMapper } from "../../../@seedwork/application/dto/pagination-output";
+import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 
 export default class ListCategoryUseCase implements UseCase<Input, Output> {
 
@@ -11,18 +11,14 @@ export default class ListCategoryUseCase implements UseCase<Input, Output> {
   async execute(input: Input): Promise<Output> {
     const params = new CategoryRepository.SearchParams(input);
     const searchResult = await this.categoryRepo.search(params);
+    return this.toOutput(searchResult);
+  }
+
+  private toOutput(searchResult: CategoryRepository.SearchResult): Output {
     return {
-      items: searchResult.items.map(item => ({
-        id: item.id,
-        name: item.name,
-        description: item.description,
-        is_active: item.is_active,
-        created_at: item.created_at
-      })),
-      total: searchResult.total,
-      current_page: searchResult.current_page,
-      per_page: searchResult.per_page,
-      last_page: searchResult.last_page,
+      items: searchResult.items
+        .map(item => CategoryOutputMapper.toOutput(item)),
+      ...PaginationOutputMapper.toPaginationOutput(searchResult),
     }
   }
 }
