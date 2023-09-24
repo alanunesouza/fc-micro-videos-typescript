@@ -1,5 +1,5 @@
 import { PaginationOutputMapper } from './pagination-output';
-import { Category } from "../../../category/domain/entities/category"
+import { Category } from "#category/domain/entities/category"
 import { SearchResult } from '../../domain/repository/repository-contract';
 
 describe('PaginationOutputMapper Unit Tests', () => {

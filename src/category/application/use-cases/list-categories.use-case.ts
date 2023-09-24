@@ -1,7 +1,7 @@
-import UseCase from "../../../@seedwork/application/use-case";
+import UseCase from "#seedwork/application/use-case";
 import { CategoryRepository } from "../../domain/repository/category.repository";
-import { SearchInputDto } from "../../../@seedwork/application/dto/search-input";
-import { PaginationOutputDto, PaginationOutputMapper } from "../../../@seedwork/application/dto/pagination-output";
+import { SearchInputDto } from "#seedwork/application/dto/search-input";
+import { PaginationOutputDto, PaginationOutputMapper } from "#seedwork/application/dto/pagination-output";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 
 export default class ListCategoryUseCase implements UseCase<Input, Output> {

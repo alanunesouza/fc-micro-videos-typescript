@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,8 +11,24 @@
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false,
-    "allowJs": true
-  }
+    "allowJs": true,
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "strict": true,
+    "paths": {
+      "#seedwork/*": [
+        "./@seedwork/*"
+      ],
+      "#category/*": [
+        "./category/*"
+      ]
+    },
+    "outDir": "./dist",
+    "declaration": true
+  },
+  "include": [
+    "src/"
+  ]
 }

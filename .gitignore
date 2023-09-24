@@ -4,3 +4,4 @@ tsconfig.tsbuildinfo
 .devcontainer
 .vscode
 __coverage
+dist
